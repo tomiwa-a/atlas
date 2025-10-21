@@ -9,10 +9,10 @@ const ContactPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <div className="min-h-screen bg-secondary text-primary">
-      <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+    <div className="min-h-screen bg-secondary text-primary flex flex-col">
+      <Nav isLandingPage={false} />
       <HeroSection />
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-4 py-16 flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <ContactDetails />
           <ContactForm />
