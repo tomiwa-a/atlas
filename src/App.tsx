@@ -4,6 +4,7 @@ import ScrollToTop from './components/ScrollToTop';
 import LandingPage from './pages/LandingPage';
 import ContactPage from './pages/ContactPage';
 import PricingPage from './pages/PricingPage';
+import HowItWorksPage from './pages/HowItWorksPage';
 import SignUp from './components/auth/SignUp';
 import SignIn from './components/auth/SignIn';
 import ForgotPassword from './components/auth/ForgotPassword';
@@ -15,6 +16,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/signup" element={<SignUp />} />

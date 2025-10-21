@@ -12,7 +12,7 @@ const Nav: React.FC<NavProps> = ({ isMenuOpen, setIsMenuOpen }) => {
   const navLinks = [
     { path: '/', title: 'Home' },
     { path: '/#about', title: 'About' },
-    { path: '/#how-it-works', title: 'How It Works' },
+    { path: '/how-it-works', title: 'How It Works' },
     { path: '/pricing', title: 'Pricing' },
     { path: '/contact', title: 'Contact' },
   ];
@@ -21,7 +21,8 @@ const Nav: React.FC<NavProps> = ({ isMenuOpen, setIsMenuOpen }) => {
   const pathToId = {
     '/': 'home',
     '/contact': 'contact',
-    '/pricing': 'pricing'
+    '/pricing': 'pricing',
+    '/how-it-works': 'how-it-works'
   };
 
   const activeSection = pathToId[location.pathname];
@@ -37,7 +38,7 @@ const Nav: React.FC<NavProps> = ({ isMenuOpen, setIsMenuOpen }) => {
                 key={link.path}
                 to={link.path}
                 className={`px-3 py-2 lg:px-5 lg:py-2 text-lg font-medium transition rounded-full ${
-                  (link.path === '/' && activeSection === 'home') || (link.path === '/contact' && activeSection === 'contact') || (link.path === '/pricing' && activeSection === 'pricing')
+                  (link.path === '/' && activeSection === 'home') || (link.path === '/contact' && activeSection === 'contact') || (link.path === '/pricing' && activeSection === 'pricing') || (link.path === '/how-it-works' && activeSection === 'how-it-works')
                     ? 'bg-primary text-secondary'
                     : 'hover:bg-primary hover:text-primary hover:bg-opacity-10'
                 }`}
