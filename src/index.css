@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Central styling */
+body {
+  @apply font-sans bg-secondary text-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Slick carousel arrows */
+.slick-prev:before,
+.slick-next:before {
+  color: black !important;
+  font-size: 30px !important;
+}
+
+.slick-prev {
+  left: 40% !important;
+  top: auto !important;
+  bottom: -60px !important;
+}
+
+.slick-next {
+  right: 40% !important;
+  top: auto !important;
+  bottom: -60px !important;
+}
+
+/* Fix slick track width on mobile */
+.slick-track {
+  width: 100% !important;
+}
