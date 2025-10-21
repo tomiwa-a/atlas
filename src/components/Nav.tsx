@@ -1,20 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface NavProps {
-  activeSection?: string;
   isMenuOpen: boolean;
   setIsMenuOpen: (open: boolean) => void;
 }
 
-const Nav: React.FC<NavProps> = ({ activeSection, isMenuOpen, setIsMenuOpen }) => {
+const Nav: React.FC<NavProps> = ({ isMenuOpen, setIsMenuOpen }) => {
+  const location = useLocation();
   const navLinks = [
-    { id: 'home', title: 'Home' },
-    { id: 'about', title: 'About' },
-    { id: 'how-it-works', title: 'How It Works' },
-    { id: 'pricing', title: 'Pricing' },
-    { id: 'contact', title: 'Contact' },
+    { path: '/', title: 'Home' },
+    { path: '/#about', title: 'About' },
+    { path: '/#how-it-works', title: 'How It Works' },
+    { path: '/#pricing', title: 'Pricing' },
+    { path: '/contact', title: 'Contact' },
   ];
+
+  // Map pathname to active id
+  const pathToId = {
+    '/': 'home',
+    '/contact': 'contact'
+  };
+
+  const activeSection = pathToId[location.pathname];
 
   return (
     <>
@@ -24,10 +32,10 @@ const Nav: React.FC<NavProps> = ({ activeSection, isMenuOpen, setIsMenuOpen }) =
           <nav className="hidden lg:flex space-x-1 items-center bg-neutral p-2 rounded-full">
             {navLinks.map((link) => (
               <Link
-                key={link.id}
-                to={`/#${link.id}`}
+                key={link.path}
+                to={link.path}
                 className={`px-3 py-2 lg:px-5 lg:py-2 text-lg font-medium transition rounded-full ${
-                  activeSection === link.id
+                  (link.path === '/' && activeSection === 'home') || (link.path === '/contact' && activeSection === 'contact')
                     ? 'bg-primary text-secondary'
                     : 'hover:bg-primary hover:text-primary hover:bg-opacity-10'
                 }`}
@@ -36,7 +44,7 @@ const Nav: React.FC<NavProps> = ({ activeSection, isMenuOpen, setIsMenuOpen }) =
               </Link>
             ))}
           </nav>
-          <div className="lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <Link to="/signup" className="text-lg font-medium hover:opacity-75 transition">Sign Up</Link>
             <Link to="/signin" className="bg-primary text-secondary px-5 py-2.5 rounded-full font-semibold hover:opacity-90 transition">Sign In</Link>
           </div>
@@ -63,8 +71,8 @@ const Nav: React.FC<NavProps> = ({ activeSection, isMenuOpen, setIsMenuOpen }) =
             <nav className="flex flex-col items-start space-y-6 pl-4 mb-4">
               {navLinks.map((link) => (
                 <Link
-                  key={link.id}
-                  to={`/#${link.id}`}
+                  key={link.path}
+                  to={link.path}
                   className="text-xl font-semibold text-primary hover:opacity-75 transition"
                   onClick={() => setIsMenuOpen(false)}
                 >

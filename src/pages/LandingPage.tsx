@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Nav from '../components/Nav';
 
 function LandingPage() {
-  const [activeSection, setActiveSection] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const sectionRefs = useRef<Record<string, HTMLElement>>({});
-  const sliderRef = useRef(null);
 
   const niches = [
     { title: 'Mathematics', usage: '100k', image: 'https://images.unsplash.com/photo-1635372722656-389f87a941b7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWF0aGVtYXRpY3N8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000' },
@@ -41,43 +38,6 @@ function LandingPage() {
     ]
   };
 
-  const navLinks = [
-    { id: 'home', title: 'Home' },
-    { id: 'about', title: 'About' },
-    { id: 'how-it-works', title: 'How It Works' },
-    { id: 'pricing', title: 'Pricing' },
-    { id: 'contact', title: 'Contact' },
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-50% 0px -50% 0px' } // Trigger when section is in the middle of the viewport
-    );
-
-    navLinks.forEach((link) => {
-      const el = document.getElementById(link.id);
-      if (el) {
-        observer.observe(el);
-        sectionRefs.current[link.id] = el;
-      }
-    });
-
-    return () => {
-      navLinks.forEach((link) => {
-        if (sectionRefs.current[link.id]) {
-          observer.unobserve(sectionRefs.current[link.id]);
-        }
-      });
-    };
-  }, [navLinks]);
-
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -88,7 +48,7 @@ function LandingPage() {
 
   return (
     <div className="min-h-screen bg-secondary text-primary">
-      <Nav activeSection={activeSection} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Nav isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
 
       {/* Hero */}
       <section id="home" className="py-20 pt-32">
