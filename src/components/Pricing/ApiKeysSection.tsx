@@ -27,7 +27,7 @@ const ApiKeysSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-secondary">
+    <section className="py-16 bg-neutral">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Side: Bring Your Own API Keys */}

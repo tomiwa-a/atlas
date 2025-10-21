@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -231,23 +232,7 @@ function LandingPage() {
          </div>
        </section>
 
-      {/* Contact */}
-      <section id="contact" className="py-20 bg-secondary">
-        <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input type="text" placeholder="Name" className="p-3 border border-neutral rounded bg-secondary text-primary" />
-            <input type="email" placeholder="Email" className="p-3 border border-neutral rounded bg-secondary text-primary" />
-            <textarea placeholder="Message" rows={4} className="p-3 border border-neutral rounded bg-secondary text-primary md:col-span-2"></textarea>
-            <button type="submit" className="bg-primary text-secondary px-6 py-3 rounded hover:bg-neutral transition md:col-span-2">Send Message</button>
-          </form>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="text-center py-4 bg-primary text-secondary">
-        <p>&copy; 2025 ATLAS. All rights reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
