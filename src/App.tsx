@@ -62,7 +62,7 @@ function App() {
     <div className="min-h-screen bg-secondary text-primary">
       {/* Header */}
       <header className="sticky top-0 bg-secondary bg-opacity-80 backdrop-blur-sm z-10">
-        <div className="container mx-auto flex justify-between items-center p-4 text-primary">
+        <div className="container mx-auto px-4 flex justify-between items-center p-4 text-primary">
           <div className="text-2xl font-bold">ATLAS</div>
           <nav className="hidden lg:flex space-x-1 items-center bg-neutral p-2 rounded-full">
             {navLinks.map((link) => (
@@ -125,7 +125,7 @@ function App() {
 
       {/* Hero */}
       <section id="home" className="py-20 pt-32">
-        <div className="container mx-auto flex flex-col md:flex-row items-center">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 text-center md:text-left">
             <h1 className="text-5xl font-roboto font-bold mb-4">Unlock Your Potential with AI-Powered Learning</h1>
             <p className="text-xl font-roboto mb-8">Experience personalized tutoring that evolves with your unique learning style</p>
@@ -171,7 +171,7 @@ function App() {
 
       {/* Learning Paths */}
       <section id="learning-paths" className="py-20 bg-secondary">
-        <div className="container mx-auto flex flex-col md:flex-row items-center">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
           <div className="md:w-1/3 text-center md:text-left mb-8 md:mb-0">
             <h2 className="text-4xl font-roboto font-bold mb-4">Explore Popular Learning Paths</h2>
             <p className="text-lg font-roboto">Discover a wide range of subjects tailored to your interests and learning style. Our AI-powered system helps you master new skills efficiently.</p>
@@ -201,7 +201,7 @@ function App() {
 
       {/* Features */}
       <section className="py-20 bg-neutral">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center p-4">
             <h3 className="text-xl font-semibold mb-2">Personalized Learning</h3>
             <p>Adapts to your knowledge and style.</p>
@@ -219,7 +219,7 @@ function App() {
 
       {/* How It Works */}
       <section id="how-it-works" className="py-20 bg-secondary">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
             <div className="text-center">
@@ -253,7 +253,7 @@ function App() {
 
       {/* Reviews */}
       <section className="py-20 bg-neutral">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-3xl font-bold text-center mb-12">What Users Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-secondary p-6 rounded shadow">
@@ -274,7 +274,7 @@ function App() {
 
       {/* Contact */}
       <section id="contact" className="py-20 bg-secondary">
-        <div className="container mx-auto max-w-4xl">
+        <div className="container mx-auto max-w-4xl px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
           <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <input type="text" placeholder="Name" className="p-3 border border-neutral rounded bg-secondary text-primary" />
