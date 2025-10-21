@@ -12,21 +12,21 @@ const Footer: React.FC = () => {
           </div>
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/" className="hover:opacity-75 transition">Home</Link></li>
-              <li><Link to="/#about" className="hover:opacity-75 transition">About</Link></li>
-              <li><Link to="/#how-it-works" className="hover:opacity-75 transition">How It Works</Link></li>
-              <li><Link to="/#pricing" className="hover:opacity-75 transition">Pricing</Link></li>
-            </ul>
+          <ul className="space-y-2 text-base">
+            <li><Link to="/" className="hover:opacity-75 transition">Home</Link></li>
+            <li><Link to="/#about" className="hover:opacity-75 transition">About</Link></li>
+            <li><Link to="/#how-it-works" className="hover:opacity-75 transition">How It Works</Link></li>
+            <li><Link to="/#pricing" className="hover:opacity-75 transition">Pricing</Link></li>
+          </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
-            <ul className="space-y-2 text-sm">
-              <li>Email: tomiwamole@gmail.com</li>
-              <li>X: @tomiwa-a</li>
-              <li>LinkedIn: Oluwatomiwa Amole</li>
-              <li>GitHub: tomiwa-a</li>
-            </ul>
+          <ul className="space-y-2 text-base">
+            <li>Email: tomiwamole@gmail.com</li>
+            <li>X: @tomiwa-a</li>
+            <li>LinkedIn: Oluwatomiwa Amole</li>
+            <li>GitHub: tomiwa-a</li>
+          </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Follow Us</h4>
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="border-t border-secondary border-opacity-20 mt-8 pt-8 text-center text-sm">
+        <div className="border-t border-secondary border-opacity-20 mt-8 pt-8 text-center text-base">
           <p>&copy; 2025 ATLAS. All rights reserved.</p>
         </div>
       </div>

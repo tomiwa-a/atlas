@@ -7,11 +7,11 @@ const ContactDetails: React.FC = () => {
       <div className="space-y-6">
         <div>
           <h3 className="text-xl font-semibold mb-2">Name</h3>
-          <p className="text-lg">Oluwatomiwa Amole</p>
+          <p className="text-xl">Oluwatomiwa Amole</p>
         </div>
         <div>
           <h3 className="text-xl font-semibold mb-2">Email</h3>
-          <p className="text-lg">tomiwamole@gmail.com</p>
+          <p className="text-xl">tomiwamole@gmail.com</p>
         </div>
         <div>
           <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
