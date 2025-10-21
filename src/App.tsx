@@ -64,7 +64,7 @@ function App() {
       <header className="sticky top-0 bg-secondary bg-opacity-80 backdrop-blur-sm z-10">
         <div className="container mx-auto flex justify-between items-center p-4 text-primary">
           <div className="text-2xl font-bold">ATLAS</div>
-          <nav className="hidden tablet:flex space-x-1 items-center bg-neutral p-2 rounded-full">
+          <nav className="hidden lg:flex space-x-1 items-center bg-neutral p-2 rounded-full">
             {navLinks.map((link) => (
               <a
                 key={link.id}
@@ -85,7 +85,7 @@ function App() {
           </div>
 
           {/* Hamburger Menu */}
-          <div className="tablet:hidden">
+          <div className="lg:hidden">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="flex flex-col space-y-1">
               <span className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
               <span className={`block w-6 h-0.5 bg-primary transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
@@ -96,15 +96,11 @@ function App() {
 
         {/* Mobile Menu Panel */}
         <div
-          className={`fixed top-16 left-0 right-0 bottom-0 z-20 tablet:hidden transition-opacity duration-300 ${
-            isMenuOpen ? 'bg-secondary bg-opacity-95' : 'pointer-events-none opacity-0'
-          }`}
+          className={`fixed top-16 left-0 right-0 bottom-0 z-20 lg:hidden flex flex-col ${isMenuOpen ? 'bg-secondary bg-opacity-95' : ''}`}
           onClick={() => setIsMenuOpen(false)}
         >
           <div
-            className={`fixed top-16 left-0 right-0 bg-secondary z-50 p-4 transition-opacity duration-300 ${
-              isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
+            className={`bg-secondary p-4 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             onClick={(e) => e.stopPropagation()}
           >
             <nav className="flex flex-col items-start space-y-6 pl-4 mb-4">
