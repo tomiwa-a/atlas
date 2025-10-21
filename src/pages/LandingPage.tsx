@@ -178,26 +178,58 @@ function LandingPage() {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section className="py-20 bg-neutral">
-        <div className="container mx-auto max-w-6xl px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">What Users Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-secondary p-6 rounded shadow">
-              <p className="mb-4">"ATLAS transformed my learning experience. The personalized lessons are spot on!"</p>
-              <p className="font-semibold">- Alex Johnson, Student</p>
-            </div>
-            <div className="bg-secondary p-6 rounded shadow">
-              <p className="mb-4">"Finally, an AI tutor that actually understands my style. Highly recommend."</p>
-              <p className="font-semibold">- Maria Garcia, Educator</p>
-            </div>
-            <div className="bg-secondary p-6 rounded shadow">
-              <p className="mb-4">"The adaptive path kept me engaged and progressing faster than ever."</p>
-              <p className="font-semibold">- David Lee, Professional</p>
-            </div>
-          </div>
-        </div>
-      </section>
+       {/* Reviews */}
+       <section className="py-20 bg-neutral">
+         <div className="container mx-auto max-w-6xl px-4">
+           <div className="text-3xl font-bold text-center mb-12 text-primary border-l-4 border-primary pl-6">
+             "Join thousands of learners who have revolutionized their education with ATLAS"
+           </div>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+             <div className="bg-secondary p-6 rounded shadow flex flex-col justify-between min-h-[200px]">
+               <p className="mb-4">"ATLAS completely changed how I approach learning. The AI adapts perfectly to my pace and keeps me motivated!"</p>
+               <div className="mt-auto">
+                 <p className="font-semibold">Alex Johnson</p>
+                 <p className="text-sm text-gray-600">Student</p>
+               </div>
+             </div>
+             <div className="bg-secondary p-6 rounded shadow flex flex-col justify-between min-h-[200px]">
+               <p className="mb-4">"As an educator, I'm impressed by how ATLAS personalizes content. It's like having a dedicated tutor for every student."</p>
+               <div className="mt-auto">
+                 <p className="font-semibold">Maria Garcia</p>
+                 <p className="text-sm text-gray-600">Educator</p>
+               </div>
+             </div>
+             <div className="bg-secondary p-6 rounded shadow flex flex-col justify-between min-h-[200px]">
+               <p className="mb-4">"The adaptive learning paths helped me master complex topics faster than traditional methods ever could."</p>
+               <div className="mt-auto">
+                 <p className="font-semibold">David Lee</p>
+                 <p className="text-sm text-gray-600">Professional</p>
+               </div>
+             </div>
+             <div className="bg-secondary p-6 rounded shadow flex flex-col justify-between min-h-[200px]">
+               <p className="mb-4">"ATLAS made programming fun and accessible. I went from beginner to building projects in weeks!"</p>
+               <div className="mt-auto">
+                 <p className="font-semibold">Sarah Chen</p>
+                 <p className="text-sm text-gray-600">Developer</p>
+               </div>
+             </div>
+             <div className="bg-secondary p-6 rounded shadow flex flex-col justify-between min-h-[200px]">
+               <p className="mb-4">"The multimodal content keeps learning engaging. Videos, quizzes, and interactive elements make all the difference."</p>
+               <div className="mt-auto">
+                 <p className="font-semibold">James Wilson</p>
+                 <p className="text-sm text-gray-600">Entrepreneur</p>
+               </div>
+             </div>
+             <div className="bg-secondary p-6 rounded shadow flex flex-col justify-between min-h-[200px]">
+               <p className="mb-4">"ATLAS helped me conquer math anxiety. The step-by-step guidance and instant feedback were game-changers."</p>
+               <div className="mt-auto">
+                 <p className="font-semibold">Emily Rodriguez</p>
+                 <p className="text-sm text-gray-600">Researcher</p>
+               </div>
+             </div>
+           </div>
+         </div>
+       </section>
 
       {/* Contact */}
       <section id="contact" className="py-20 bg-secondary">
