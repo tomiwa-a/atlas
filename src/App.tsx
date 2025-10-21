@@ -5,6 +5,10 @@ import LandingPage from './pages/LandingPage';
 import ContactPage from './pages/ContactPage';
 import PricingPage from './pages/PricingPage';
 import HowItWorksPage from './pages/HowItWorksPage';
+import DashboardLayout from './pages/Dashboard/DashboardLayout';
+import DashboardHome from './pages/Dashboard/DashboardHome';
+import LearningPaths from './pages/Dashboard/LearningPaths';
+import Profile from './pages/Dashboard/Profile';
 import SignUp from './components/auth/SignUp';
 import SignIn from './components/auth/SignIn';
 import ForgotPassword from './components/auth/ForgotPassword';
@@ -17,6 +21,9 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/dashboard" element={<DashboardLayout><DashboardHome /></DashboardLayout>} />
+        <Route path="/dashboard/learning-paths" element={<DashboardLayout><LearningPaths /></DashboardLayout>} />
+        <Route path="/dashboard/profile" element={<DashboardLayout><Profile /></DashboardLayout>} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/signup" element={<SignUp />} />
