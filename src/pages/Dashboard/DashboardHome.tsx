@@ -1,12 +1,13 @@
-import React from 'react';
+ import React from 'react';
+import { FaBook, FaBullseye, FaClock, FaTrophy, FaFire } from 'react-icons/fa';
 
 const DashboardHome: React.FC = () => {
   // Mock data
   const stats = [
-    { title: 'Total Lessons', value: '127', change: '+12%', icon: '📚' },
-    { title: 'Average Score', value: '89%', change: '+5%', icon: '🎯' },
-    { title: 'Time Spent', value: '24h', change: '+8%', icon: '⏱️' },
-    { title: 'Subjects Mastered', value: '3', change: '+1', icon: '🏆' },
+    { title: 'Total Lessons', value: '127', change: '+12%', icon: <FaBook /> },
+    { title: 'Average Score', value: '89%', change: '+5%', icon: <FaBullseye /> },
+    { title: 'Time Spent', value: '24h', change: '+8%', icon: <FaClock /> },
+    { title: 'Subjects Mastered', value: '3', change: '+1', icon: <FaTrophy /> },
   ];
 
   const recentActivity = [
@@ -39,13 +40,13 @@ const DashboardHome: React.FC = () => {
               </button>
             </div>
           </div>
-          <div className="mt-6 md:mt-0">
-            <div className="text-center">
-              <div className="text-4xl mb-2">🔥</div>
-              <p className="text-sm text-gray-600">Current Streak</p>
-              <p className="text-2xl font-bold">5 days</p>
-            </div>
-          </div>
+           <div className="mt-6 md:mt-0">
+             <div className="text-center">
+               <div className="text-4xl mb-2"><FaFire /></div>
+               <p className="text-sm text-gray-600">Current Streak</p>
+               <p className="text-2xl font-bold">5 days</p>
+             </div>
+           </div>
         </div>
       </div>
 
@@ -59,7 +60,7 @@ const DashboardHome: React.FC = () => {
                 <p className="text-2xl font-bold">{stat.value}</p>
                 <p className="text-sm text-green-600">{stat.change}</p>
               </div>
-              <div className="text-3xl">{stat.icon}</div>
+               <div className="text-3xl text-primary">{stat.icon}</div>
             </div>
           </div>
         ))}
