@@ -12,6 +12,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard' },
+    { name: 'My Tutorials', href: '/dashboard/my-tutorials' },
     {
       name: 'Learning Paths',
       dropdown: true,
