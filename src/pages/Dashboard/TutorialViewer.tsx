@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { FaArrowLeft, FaCopy, FaCheck, FaStar, FaShare, FaDownload, FaPlay, FaPause, FaCode, FaLightbulb, FaCheckCircle } from 'react-icons/fa';
 
 interface TutorialSection {
@@ -29,121 +29,89 @@ interface Tutorial {
 const TutorialViewer: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const tutorialData = location.state?.tutorialData;
+  const courseId = location.state?.courseId;
+  const isShared = location.state?.shared;
 
-  // Mock tutorial data - in real app this would come from API
-  const [tutorial] = useState<Tutorial>({
-    id: 'tutorial-1',
-    title: tutorialData?.topic || 'React Hooks Fundamentals',
-    description: `A comprehensive guide to understanding and using React Hooks effectively in your applications. ${tutorialData?.topic ? `Focused on ${tutorialData.topic}.` : ''}`,
-    difficulty: tutorialData?.difficulty || 'intermediate',
-    estimatedTime: '45 minutes',
-    tags: ['React', 'JavaScript', 'Frontend', 'Hooks'],
-    createdAt: new Date().toISOString(),
-    sections: [
-      {
-        id: 'intro',
-        title: 'Introduction to React Hooks',
-        content: `React Hooks are functions that let you "hook into" React state and lifecycle features from function components. They were introduced in React 16.8 as a way to use state and other React features without writing a class component.
-
-Hooks solve a wide variety of seemingly unconnected problems in React that we've encountered over five years of writing and maintaining tens of thousands of components. You can learn more about why we're introducing Hooks by reading our motivation.`,
-        codeExample: `import React, { useState } from 'react';
-
-function Example() {
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState(0);
-
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}`,
-        tips: [
-          'Hooks can only be called at the top level of React functions',
-          'Hooks can only be called from React function components or custom Hooks',
-          'Always use hooks in the same order on every render'
-        ]
-      },
-      {
-        id: 'usestate',
-        title: 'The useState Hook',
-        content: `useState is a Hook that lets you add React state to function components. It returns an array with two values: the current state and a function to update it.
-
-The useState hook takes an initial state value as a parameter and returns an array containing the current state value and a setter function.`,
-        codeExample: `import React, { useState } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState('John');
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <p>Name: {name}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-    </div>
-  );
-}`,
-        quiz: {
-          question: 'What does useState return?',
-          options: [
-            'A single value representing the current state',
-            'An array with the current state and a setter function',
-            'An object with state and actions',
-            'A promise that resolves to the state'
-          ],
-          correctAnswer: 1
+  // Mock course data mapping
+  const mockCourses: Record<string, Tutorial> = {
+    '1': {
+      id: '1',
+      title: 'React Hooks Fundamentals',
+      description: 'A comprehensive guide to understanding and using React Hooks effectively.',
+      difficulty: 'intermediate',
+      estimatedTime: '45 minutes',
+      tags: ['React', 'JavaScript', 'Frontend', 'Hooks'],
+      createdAt: '2024-01-15T00:00:00.000Z',
+      sections: [
+        {
+          id: 'intro',
+          title: 'Introduction to React Hooks',
+          content: `React Hooks are functions that let you "hook into" React state and lifecycle features from function components. They were introduced in React 16.8 as a way to use state and other React features without writing a class component.`,
+          codeExample: `import React, { useState } from 'react';\n\nfunction Example() {\n  const [count, setCount] = useState(0);\n  return <div>{count}</div>;\n}`,
+          tips: ['Hooks can only be called at the top level', 'Use hooks in React functions only']
         }
-      },
-      {
-        id: 'useeffect',
-        title: 'The useEffect Hook',
-        content: `The useEffect Hook lets you perform side effects in function components. It serves the same purpose as componentDidMount, componentDidUpdate, and componentWillUnmount in React classes, but unified into a single API.
+      ]
+    },
+    '2': {
+      id: '2',
+      title: 'Advanced UI/UX Design Principles',
+      description: 'Deep dive into modern design principles and user experience patterns.',
+      difficulty: 'advanced',
+      estimatedTime: '60 minutes',
+      tags: ['Design', 'UI/UX', 'Figma', 'Prototyping'],
+      createdAt: '2024-01-10T00:00:00.000Z',
+      sections: [
+        {
+          id: 'design-intro',
+          title: 'Design Fundamentals',
+          content: 'Understanding the core principles of effective UI/UX design.',
+          tips: ['Focus on user needs', 'Keep it simple', 'Test early and often']
+        }
+      ]
+    },
+    '3': {
+      id: '3',
+      title: 'Digital Marketing Strategies',
+      description: 'Learn effective digital marketing strategies for growing your business.',
+      difficulty: 'beginner',
+      estimatedTime: '40 minutes',
+      tags: ['Marketing', 'Business', 'SEO', 'Social Media'],
+      createdAt: '2024-01-08T00:00:00.000Z',
+      sections: [
+        {
+          id: 'marketing-intro',
+          title: 'Marketing Basics',
+          content: 'Introduction to digital marketing fundamentals.',
+          tips: ['Know your audience', 'Track your results', 'Stay consistent']
+        }
+      ]
+    },
+    'ai-ethics': {
+      id: 'ai-ethics',
+      title: 'AI Ethics and Responsible Development',
+      description: 'Exploring the ethical considerations in AI development and deployment.',
+      difficulty: 'intermediate',
+      estimatedTime: '50 minutes',
+      tags: ['AI', 'Ethics', 'Technology', 'Society'],
+      createdAt: '2024-01-12T00:00:00.000Z',
+      sections: [
+        {
+          id: 'ethics-intro',
+          title: 'Understanding AI Ethics',
+          content: 'The importance of ethical considerations in artificial intelligence.',
+          tips: ['Bias awareness', 'Transparency', 'Accountability']
+        }
+      ]
+    }
+  };
 
-By default, useEffect runs after every completed render, but you can choose to fire it only when certain values have changed.`,
-        codeExample: `import React, { useState, useEffect } from 'react';
-
-function Example() {
-  const [count, setCount] = useState(0);
-
-  // Similar to componentDidMount and componentDidUpdate:
-  useEffect(() => {
-    // Update the document title using the browser API
-    document.title = \`You clicked \${count} times\`;
-
-    // Cleanup function (optional)
-    return () => {
-      console.log('Cleanup');
-    };
-  }, [count]); // Only re-run the effect if count changes
-
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}`,
-        tips: [
-          'useEffect runs after every render by default',
-          'Pass an empty array [] to run only once on mount',
-          'Include dependencies in the array to control when it runs',
-          'Return a cleanup function for side effects that need cleanup'
-        ]
-      }
-    ]
+  // Get tutorial data based on courseId or fallback
+  const [tutorial] = useState<Tutorial>(() => {
+    if (courseId && mockCourses[courseId]) {
+      return mockCourses[courseId];
+    }
+    // Fallback to default
+    return mockCourses['1'];
   });
 
   const [currentSection, setCurrentSection] = useState(0);
@@ -203,13 +171,18 @@ function Example() {
             </div>
           </div>
           <div className="flex gap-2">
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+            {!location.state?.shared && (
+              <Link to={`/dashboard/editor/${tutorial.id}`} className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:opacity-90">
+                <FaEdit /> Edit
+              </Link>
+            )}
+            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50">
               <FaStar /> Favorite
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50">
               <FaShare /> Share
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50">
               <FaDownload /> Export
             </button>
           </div>

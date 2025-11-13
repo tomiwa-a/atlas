@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight, FaCheck, FaLightbulb, FaUsers, FaBullseye, FaBookOpen, FaCog } from 'react-icons/fa';
 
 interface WizardStep {
@@ -401,9 +401,10 @@ const FinalStep: React.FC<StepProps> = ({ data, onUpdate, onNext, onBack }) => {
 const TutorialCreationWizard: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [currentStep, setCurrentStep] = useState(0);
   const [wizardData, setWizardData] = useState<any>({
-    niche: searchParams.get('niche') || '',
+    niche: location.state?.niche || searchParams.get('niche') || '',
   });
 
   const steps: WizardStep[] = [

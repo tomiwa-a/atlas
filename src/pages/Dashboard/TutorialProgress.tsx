@@ -98,9 +98,9 @@ const TutorialProgress: React.FC = () => {
 
   useEffect(() => {
     if (isComplete) {
-      // Navigate to the completed tutorial after a short delay
+      // Navigate to the editor for the newly created tutorial
       setTimeout(() => {
-        navigate('/dashboard/tutorial-viewer', {
+        navigate('/dashboard/editor/new', {
           state: { tutorialData, isNew: true }
         });
       }, 2000);
@@ -116,7 +116,7 @@ const TutorialProgress: React.FC = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed': return 'text-green-600 bg-green-100';
-      case 'active': return 'text-blue-600 bg-blue-100';
+      case 'active': return 'text-primary bg-primary/10';
       default: return 'text-gray-400 bg-gray-100';
     }
   };
@@ -131,7 +131,7 @@ const TutorialProgress: React.FC = () => {
 
   if (isComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-secondary flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8 text-center">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <FaCheck className="text-3xl text-green-600" />
@@ -141,7 +141,7 @@ const TutorialProgress: React.FC = () => {
             Your personalized tutorial has been generated successfully. Redirecting you now...
           </p>
           <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           </div>
         </div>
       </div>
@@ -149,12 +149,12 @@ const TutorialProgress: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
+    <div className="min-h-screen bg-secondary p-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <FaRocket className="text-2xl text-blue-600" />
+          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <FaRocket className="text-2xl text-primary" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Generating Your Tutorial</h1>
           <p className="text-gray-600">
@@ -170,7 +170,7 @@ const TutorialProgress: React.FC = () => {
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
             <div
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 h-3 rounded-full transition-all duration-300 ease-out"
+              className="bg-primary h-3 rounded-full transition-all duration-300 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -184,7 +184,7 @@ const TutorialProgress: React.FC = () => {
               <div
                 key={step.id}
                 className={`bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ${
-                  status === 'active' ? 'ring-2 ring-blue-200 shadow-xl' : ''
+                  status === 'active' ? 'ring-2 ring-primary/20 shadow-xl' : ''
                 }`}
               >
                 <div className="flex items-center space-x-4">
@@ -206,7 +206,7 @@ const TutorialProgress: React.FC = () => {
                       <span className="text-green-600 font-medium">✓ Complete</span>
                     )}
                     {status === 'active' && (
-                      <span className="text-blue-600 font-medium">In Progress...</span>
+                      <span className="text-primary font-medium">In Progress...</span>
                     )}
                   </div>
                 </div>
@@ -218,8 +218,8 @@ const TutorialProgress: React.FC = () => {
         {/* Current Activity */}
         <div className="mt-8 bg-white rounded-xl shadow-lg p-6">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-              <FaSpinner className="text-blue-600 animate-spin text-sm" />
+            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+              <FaSpinner className="text-primary animate-spin text-sm" />
             </div>
             <div>
               <p className="text-sm text-gray-600">
@@ -232,7 +232,7 @@ const TutorialProgress: React.FC = () => {
         </div>
 
         {/* Fun Facts */}
-        <div className="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6">
+        <div className="mt-6 bg-neutral rounded-xl p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Did you know?</h3>
           <div className="space-y-2 text-sm text-gray-700">
             <p>• Our AI analyzes thousands of learning resources to create the best content</p>

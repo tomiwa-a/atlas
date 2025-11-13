@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { FaArrowLeft, FaPlus, FaEdit, FaTrash, FaSave, FaEye, FaShare, FaCoins } from 'react-icons/fa';
 
 interface Section {
@@ -18,24 +18,47 @@ interface Section {
 const TutorialEditor: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Mock tutorial data - in real app, fetch by id
-  const [tutorial, setTutorial] = useState({
-    id: id || 'new',
-    title: 'React Hooks Fundamentals',
-    description: 'A comprehensive guide to understanding and using React Hooks effectively.',
-    difficulty: 'intermediate',
-    sections: [
-      {
-        id: 'intro',
-        title: 'Introduction to React Hooks',
-        content: 'React Hooks are functions that let you "hook into" React state and lifecycle features from function components.',
-        codeExample: `import React, { useState } from 'react';\n\nfunction Example() {\n  const [count, setCount] = useState(0);\n  return <div>{count}</div>;\n}`,
-        tips: ['Hooks can only be called at the top level', 'Use hooks in React functions only']
-      }
-    ] as Section[],
-    status: 'draft',
-    tokensUsed: 25
+  // Mock tutorial data - in real app, fetch by id or use generated data
+  const [tutorial, setTutorial] = useState(() => {
+    if (location.state?.tutorialData) {
+      // New tutorial from wizard
+      return {
+        id: id || 'new',
+        title: location.state.tutorialData.topic || 'New Tutorial',
+        description: `Generated tutorial for ${location.state.tutorialData.topic}`,
+        difficulty: location.state.tutorialData.difficulty || 'intermediate',
+        sections: [
+          {
+            id: 'intro',
+            title: 'Introduction',
+            content: 'This is an auto-generated introduction. Edit as needed.',
+            tips: ['Customize this content for your audience']
+          }
+        ] as Section[],
+        status: 'draft',
+        tokensUsed: 25
+      };
+    }
+    // Existing tutorial
+    return {
+      id: id || 'new',
+      title: 'React Hooks Fundamentals',
+      description: 'A comprehensive guide to understanding and using React Hooks effectively.',
+      difficulty: 'intermediate',
+      sections: [
+        {
+          id: 'intro',
+          title: 'Introduction to React Hooks',
+          content: 'React Hooks are functions that let you "hook into" React state and lifecycle features from function components.',
+          codeExample: `import React, { useState } from 'react';\n\nfunction Example() {\n  const [count, setCount] = useState(0);\n  return <div>{count}</div>;\n}`,
+          tips: ['Hooks can only be called at the top level', 'Use hooks in React functions only']
+        }
+      ] as Section[],
+      status: 'draft',
+      tokensUsed: 25
+    };
   });
 
   const [currentSection, setCurrentSection] = useState(0);

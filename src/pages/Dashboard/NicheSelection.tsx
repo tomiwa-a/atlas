@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaCode, FaPaintBrush, FaChartLine, FaCamera, FaMusic, FaGamepad, FaLeaf, FaUtensils } from 'react-icons/fa';
 
 const NicheSelection: React.FC = () => {
+  const navigate = useNavigate();
   const niches = [
     {
       id: 'programming',
@@ -70,8 +72,8 @@ const NicheSelection: React.FC = () => {
   ];
 
   const handleNicheSelect = (nicheId: string) => {
-    // Navigate to tutorial creation wizard
-    window.location.href = `/dashboard/create-tutorial?niche=${nicheId}`;
+    // Navigate to tutorial creation wizard with niche
+    navigate('/dashboard/create-tutorial', { state: { niche: nicheId } });
   };
 
   return (

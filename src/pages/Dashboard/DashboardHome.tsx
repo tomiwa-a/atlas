@@ -19,9 +19,9 @@ const DashboardHome: React.FC = () => {
   ];
 
   const activeCourses = [
-    { title: 'Mathematics Fundamentals', progress: 75, lessons: '15/20', timeLeft: '2 weeks', type: 'learning' },
-    { title: 'React Hooks Guide', progress: 60, sections: '6/10', timeLeft: 'Draft', type: 'creating' },
-    { title: 'Python Basics', progress: 100, lessons: '20/20', timeLeft: 'Completed', type: 'learning' },
+    { id: 'math-1', title: 'Mathematics Fundamentals', progress: 75, lessons: '15/20', timeLeft: '2 weeks', type: 'learning' },
+    { id: 'react-1', title: 'React Hooks Guide', progress: 60, sections: '6/10', timeLeft: 'Draft', type: 'creating' },
+    { id: 'python-1', title: 'Python Basics', progress: 100, lessons: '20/20', timeLeft: 'Completed', type: 'learning' },
   ];
 
   return (
@@ -33,7 +33,7 @@ const DashboardHome: React.FC = () => {
             <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
             <p className="text-lg text-gray-600 mb-4">You're on a 5-day learning streak and have created 5 amazing courses!</p>
             <div className="flex space-x-4">
-              <Link to="/dashboard/create-tutorial" className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition inline-block">
+              <Link to="/dashboard/niches" className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition inline-block">
                 Create New Course
               </Link>
               <Link to="/dashboard/library" className="border border-primary text-primary px-6 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition inline-block">
@@ -114,9 +114,15 @@ const DashboardHome: React.FC = () => {
                 <p className="text-sm text-gray-600">
                   {course.type === 'learning' ? `${course.progress}% complete • ${course.timeLeft} left` : `${course.sections} • ${course.timeLeft}`}
                 </p>
-                <button className="mt-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition">
-                  {course.type === 'learning' ? 'Continue Learning' : 'Continue Editing'}
-                </button>
+                {course.type === 'learning' ? (
+                  <button className="mt-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition">
+                    Continue Learning
+                  </button>
+                ) : (
+                  <Link to={`/dashboard/editor/${course.id}`} className="mt-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition inline-block">
+                    Continue Editing
+                  </Link>
+                )}
               </div>
             ))}
           </div>
@@ -144,9 +150,9 @@ const DashboardHome: React.FC = () => {
           <div className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition">
             <h3 className="font-semibold mb-2">Explore Shared Course</h3>
             <p className="text-sm text-gray-600 mb-3">"AI Ethics" shared by Sarah - enroll now</p>
-            <button className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition">
+            <Link to="/dashboard/tutorial-viewer" state={{ courseId: 'ai-ethics', shared: true }} className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition inline-block">
               Enroll Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>

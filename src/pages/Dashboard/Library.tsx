@@ -209,14 +209,14 @@ const Library: React.FC = () => {
                   )}
 
                   <div className="flex space-x-2">
-                    <button className="flex-1 bg-primary text-white px-3 py-2 rounded text-sm font-medium hover:opacity-90 transition flex items-center justify-center">
+                    <Link to="/dashboard/tutorial-viewer" state={{ courseId: course.id }} className="flex-1 bg-primary text-white px-3 py-2 rounded text-sm font-medium hover:opacity-90 transition flex items-center justify-center">
                       <FaEye className="mr-2" />
                       View
-                    </button>
-                    <button className="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-sm font-medium hover:opacity-90 transition flex items-center justify-center">
+                    </Link>
+                    <Link to={`/dashboard/editor/${course.id}`} className="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-sm font-medium hover:opacity-90 transition flex items-center justify-center">
                       <FaEdit className="mr-2" />
                       Edit
-                    </button>
+                    </Link>
                     {course.status === 'published' && (
                       <button
                         onClick={() => copyShareLink(course.id)}
@@ -267,14 +267,14 @@ const Library: React.FC = () => {
                   </div>
 
                   <div className="flex space-x-2">
-                    <button className={`flex-1 px-3 py-2 rounded text-sm font-medium transition flex items-center justify-center ${
+                    <Link to="/dashboard/tutorial-viewer" state={{ courseId: course.id, shared: true }} className={`flex-1 px-3 py-2 rounded text-sm font-medium transition flex items-center justify-center ${
                       course.enrolled
                         ? 'bg-primary text-white hover:opacity-90'
                         : 'bg-green-500 text-white hover:opacity-90'
                     }`}>
                       <FaEye className="mr-2" />
                       {course.enrolled ? 'Continue' : 'Enroll'}
-                    </button>
+                    </Link>
                     <button className="px-3 py-2 border border-red-300 text-red-600 rounded text-sm font-medium hover:bg-red-50 transition flex items-center justify-center">
                       Leave
                     </button>
