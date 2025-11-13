@@ -21,6 +21,8 @@ import TutorialCreationWizard from './pages/Dashboard/TutorialCreationWizard';
 import TutorialProgress from './pages/Dashboard/TutorialProgress';
 import TutorialViewer from './pages/Dashboard/TutorialViewer';
 import MyTutorials from './pages/Dashboard/MyTutorials';
+import Library from './pages/Dashboard/Library';
+import TutorialEditor from './pages/Dashboard/TutorialEditor';
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
         <Route path="/dashboard/tutorial-progress" element={<DashboardLayout><TutorialProgress /></DashboardLayout>} />
         <Route path="/dashboard/tutorial-viewer" element={<DashboardLayout><TutorialViewer /></DashboardLayout>} />
         <Route path="/dashboard/my-tutorials" element={<DashboardLayout><MyTutorials /></DashboardLayout>} />
+        <Route path="/dashboard/library" element={<DashboardLayout><Library /></DashboardLayout>} />
+        <Route path="/dashboard/editor/:id" element={<DashboardLayout><TutorialEditor /></DashboardLayout>} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/signup" element={<SignUp />} />

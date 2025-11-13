@@ -187,10 +187,10 @@ function Example() {
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
             <button
-              onClick={() => navigate('/dashboard/my-tutorials')}
+              onClick={() => navigate('/dashboard/library')}
               className="flex items-center gap-2 text-gray-600 hover:text-gray-800 mb-4"
             >
-              <FaArrowLeft /> Back to My Tutorials
+              <FaArrowLeft /> Back to Library
             </button>
             <h1 className="text-3xl font-bold mb-2">{tutorial.title}</h1>
             <p className="text-gray-600 text-lg mb-4">{tutorial.description}</p>

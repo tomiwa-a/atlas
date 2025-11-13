@@ -1,26 +1,27 @@
  import React from 'react';
-import { FaBook, FaBullseye, FaClock, FaTrophy, FaFire } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaBook, FaBullseye, FaClock, FaTrophy, FaFire, FaPen, FaShare, FaCoins } from 'react-icons/fa';
 
 const DashboardHome: React.FC = () => {
-  // Mock data
+  // Mock data - unified stats
   const stats = [
-    { title: 'Total Lessons', value: '127', change: '+12%', icon: <FaBook /> },
-    { title: 'Average Score', value: '89%', change: '+5%', icon: <FaBullseye /> },
-    { title: 'Time Spent', value: '24h', change: '+8%', icon: <FaClock /> },
-    { title: 'Subjects Mastered', value: '3', change: '+1', icon: <FaTrophy /> },
+    { title: 'Courses Created', value: '5', change: '+2', icon: <FaPen /> },
+    { title: 'Tokens Used', value: '150', change: '-20', icon: <FaCoins /> },
+    { title: 'Courses Completed', value: '12', change: '+3', icon: <FaTrophy /> },
+    { title: 'Time Learned', value: '24h', change: '+8%', icon: <FaClock /> },
   ];
 
   const recentActivity = [
-    { action: 'Completed Mathematics Quiz', score: '95%', time: '2 hours ago' },
-    { action: 'Started Science Chapter 5', score: null, time: '1 day ago' },
-    { action: 'Achieved "Quick Learner" Badge', score: null, time: '3 days ago' },
-    { action: 'Updated Learning Preferences', score: null, time: '1 week ago' },
+    { action: 'Created "React Hooks Guide"', type: 'created', time: '2 hours ago' },
+    { action: 'Completed Mathematics Quiz', score: '95%', type: 'learned', time: '1 day ago' },
+    { action: 'Shared "Python Basics" with 3 friends', type: 'shared', time: '2 days ago' },
+    { action: 'Enrolled in "AI Ethics" course', type: 'enrolled', time: '3 days ago' },
   ];
 
-  const currentPaths = [
-    { subject: 'Mathematics', progress: 75, lessons: '15/20', timeLeft: '2 weeks' },
-    { subject: 'Science', progress: 60, lessons: '12/20', timeLeft: '3 weeks' },
-    { subject: 'Programming', progress: 40, lessons: '8/20', timeLeft: '4 weeks' },
+  const activeCourses = [
+    { title: 'Mathematics Fundamentals', progress: 75, lessons: '15/20', timeLeft: '2 weeks', type: 'learning' },
+    { title: 'React Hooks Guide', progress: 60, sections: '6/10', timeLeft: 'Draft', type: 'creating' },
+    { title: 'Python Basics', progress: 100, lessons: '20/20', timeLeft: 'Completed', type: 'learning' },
   ];
 
   return (
@@ -30,14 +31,14 @@ const DashboardHome: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
-            <p className="text-lg text-gray-600 mb-4">You're on a 5-day learning streak. Keep it up!</p>
+            <p className="text-lg text-gray-600 mb-4">You're on a 5-day learning streak and have created 5 amazing courses!</p>
             <div className="flex space-x-4">
-              <button className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition">
-                Start New Lesson
-              </button>
-              <button className="border border-primary text-primary px-6 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition">
-                View Progress
-              </button>
+              <Link to="/dashboard/create-tutorial" className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition inline-block">
+                Create New Course
+              </Link>
+              <Link to="/dashboard/library" className="border border-primary text-primary px-6 py-3 rounded-full font-semibold hover:bg-primary hover:text-white transition inline-block">
+                Browse Library
+              </Link>
             </div>
           </div>
            <div className="mt-6 md:mt-0">
@@ -73,9 +74,16 @@ const DashboardHome: React.FC = () => {
           <div className="space-y-4">
             {recentActivity.map((activity, index) => (
               <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0">
-                <div>
-                  <p className="font-medium">{activity.action}</p>
-                  {activity.score && <p className="text-sm text-green-600">Score: {activity.score}</p>}
+                <div className="flex items-center space-x-3">
+                  <div className={`w-2 h-2 rounded-full ${
+                    activity.type === 'created' ? 'bg-blue-500' :
+                    activity.type === 'learned' ? 'bg-green-500' :
+                    activity.type === 'shared' ? 'bg-purple-500' : 'bg-orange-500'
+                  }`} />
+                  <div>
+                    <p className="font-medium">{activity.action}</p>
+                    {activity.score && <p className="text-sm text-green-600">Score: {activity.score}</p>}
+                  </div>
                 </div>
                 <p className="text-sm text-gray-500">{activity.time}</p>
               </div>
@@ -83,25 +91,31 @@ const DashboardHome: React.FC = () => {
           </div>
         </div>
 
-        {/* Current Learning Paths */}
+        {/* Active Courses */}
         <div className="bg-white p-6 rounded-lg border border-neutral shadow-sm">
-          <h2 className="text-xl font-semibold mb-4">Current Learning Paths</h2>
+          <h2 className="text-xl font-semibold mb-4">Active Courses</h2>
           <div className="space-y-4">
-            {currentPaths.map((path, index) => (
+            {activeCourses.map((course, index) => (
               <div key={index} className="p-4 border border-gray-200 rounded-lg">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="font-semibold">{path.subject}</h3>
-                  <span className="text-sm text-gray-600">{path.lessons}</span>
+                  <h3 className="font-semibold">{course.title}</h3>
+                  <span className={`text-xs px-2 py-1 rounded-full ${
+                    course.type === 'learning' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+                  }`}>
+                    {course.type === 'learning' ? 'Learning' : 'Creating'}
+                  </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
                   <div
                     className="bg-primary h-2 rounded-full"
-                    style={{ width: `${path.progress}%` }}
+                    style={{ width: `${course.progress}%` }}
                   ></div>
                 </div>
-                <p className="text-sm text-gray-600">{path.progress}% complete • {path.timeLeft} left</p>
+                <p className="text-sm text-gray-600">
+                  {course.type === 'learning' ? `${course.progress}% complete • ${course.timeLeft} left` : `${course.sections} • ${course.timeLeft}`}
+                </p>
                 <button className="mt-2 bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition">
-                  Continue
+                  {course.type === 'learning' ? 'Continue Learning' : 'Continue Editing'}
                 </button>
               </div>
             ))}
@@ -114,6 +128,13 @@ const DashboardHome: React.FC = () => {
         <h2 className="text-xl font-semibold mb-4">Recommended Next Steps</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition">
+            <h3 className="font-semibold mb-2">Continue Editing "React Hooks"</h3>
+            <p className="text-sm text-gray-600 mb-3">Add more sections to your popular course</p>
+            <Link to="/dashboard/editor/1" className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition inline-block">
+              Edit Course
+            </Link>
+          </div>
+          <div className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition">
             <h3 className="font-semibold mb-2">Advanced Algebra Quiz</h3>
             <p className="text-sm text-gray-600 mb-3">Test your understanding of complex equations</p>
             <button className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition">
@@ -121,17 +142,10 @@ const DashboardHome: React.FC = () => {
             </button>
           </div>
           <div className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition">
-            <h3 className="font-semibold mb-2">Physics Fundamentals</h3>
-            <p className="text-sm text-gray-600 mb-3">Explore the basics of motion and energy</p>
+            <h3 className="font-semibold mb-2">Explore Shared Course</h3>
+            <p className="text-sm text-gray-600 mb-3">"AI Ethics" shared by Sarah - enroll now</p>
             <button className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition">
-              Start Lesson
-            </button>
-          </div>
-          <div className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition">
-            <h3 className="font-semibold mb-2">Code Review Practice</h3>
-            <p className="text-sm text-gray-600 mb-3">Improve your programming skills with peer reviews</p>
-            <button className="bg-primary text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition">
-              Practice Now
+              Enroll Now
             </button>
           </div>
         </div>
