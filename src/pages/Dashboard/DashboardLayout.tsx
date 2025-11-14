@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaBell, FaSearch } from 'react-icons/fa';
+import NotificationDropdown from '../../components/dashboard/NotificationDropdown';
+import ProfileDropdown from '../../components/dashboard/ProfileDropdown';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -8,7 +11,31 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const location = useLocation();
+
+  // Refs for dropdowns
+  const notificationsRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  // Mock unread notifications count
+  const unreadNotifications = 2;
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target as Node)) {
+        setNotificationsOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard' },
@@ -163,7 +190,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
       {/* Right Side Content Area */}
       <div className="lg:ml-64 flex flex-col min-h-screen">
-        {/* Fixed Header */}
+         {/* Fixed Header */}
         <header className="fixed top-0 left-0 right-0 z-40 bg-black text-white shadow-sm px-4 py-3 lg:left-64 lg:px-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -178,17 +205,53 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
               </button>
             </div>
 
+            {/* Center - Search (hidden on mobile) */}
+            <div className="hidden md:flex flex-1 max-w-md mx-4">
+              <div className="relative w-full">
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search courses..."
+                  className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </div>
+            </div>
+
             <div className="flex items-center space-x-4">
-              {/* <button className="p-2 rounded-full hover:bg-gray-800">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM4.868 12.683A17.925 17.925 0 0112 21c7.962 0 12-1.21 12-2.683m-12 2.683a17.925 17.925 0 01-7.132-8.317M12 21c4.411 0 8-4.03 8-9s-3.589-9-8-9-8 4.03-8 9a9.06 9.06 0 001.832 5.683L4 21l4.868-8.317z" />
-                </svg>
-              </button> */}
-               <div className="flex items-center space-x-2">
-                 <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                   <span className="text-white text-base font-semibold">JD</span>
-                 </div>
-                 {/* <span className="hidden md:block text-lg">John Doe</span> */}
+              {/* Notifications */}
+              <div className="relative" ref={notificationsRef}>
+                <button
+                  onClick={() => {
+                    setNotificationsOpen(!notificationsOpen);
+                    setProfileOpen(false);
+                  }}
+                  className="p-2 rounded-md hover:bg-gray-800 relative"
+                >
+                  <FaBell className="w-5 h-5" />
+                  {unreadNotifications > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                      {unreadNotifications}
+                    </span>
+                  )}
+                </button>
+                {notificationsOpen && <NotificationDropdown onClose={() => setNotificationsOpen(false)} />}
+              </div>
+
+              {/* Profile */}
+              <div className="relative" ref={profileRef}>
+                <button
+                  onClick={() => {
+                    setProfileOpen(!profileOpen);
+                    setNotificationsOpen(false);
+                  }}
+                  className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-800"
+                >
+                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-semibold">JD</span>
+                  </div>
+                  <span className="hidden lg:block text-sm">John Doe</span>
+                </button>
+                {profileOpen && <ProfileDropdown onClose={() => setProfileOpen(false)} />}
               </div>
             </div>
           </div>
