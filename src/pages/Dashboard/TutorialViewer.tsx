@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { FaArrowLeft, FaCopy, FaCheck, FaStar, FaShare, FaDownload, FaPlay, FaPause, FaCode, FaLightbulb, FaCheckCircle } from 'react-icons/fa';
+import { FaArrowLeft, FaCopy, FaCheck, FaStar, FaShare, FaDownload, FaPlay, FaPause, FaCode, FaLightbulb, FaCheckCircle, FaEdit } from 'react-icons/fa';
 
 interface TutorialSection {
   id: string;

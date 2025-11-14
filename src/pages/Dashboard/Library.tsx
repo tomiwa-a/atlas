@@ -10,7 +10,7 @@ const Library: React.FC = () => {
   // Mock data for user's created courses
   const myCourses = [
     {
-      id: '1',
+      id: 's1',
       title: 'Introduction to React Hooks',
       niche: 'Programming',
       nicheIcon: <FaBook />,
@@ -209,7 +209,7 @@ const Library: React.FC = () => {
                   )}
 
                   <div className="flex space-x-2">
-                    <Link to="/dashboard/tutorial-viewer" state={{ courseId: course.id }} className="flex-1 bg-primary text-white px-3 py-2 rounded text-sm font-medium hover:opacity-90 transition flex items-center justify-center">
+                    <Link to="/dashboard/tutorial-viewer" state={{ courseId: course.id, shared: false  }} className="flex-1 bg-primary text-white px-3 py-2 rounded text-sm font-medium hover:opacity-90 transition flex items-center justify-center">
                       <FaEye className="mr-2" />
                       View
                     </Link>
